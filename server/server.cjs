@@ -180,7 +180,7 @@ app.post('/admin/login', (req, res) => {
   }
 
   const adminUsername = 'AdMiN@job';
-  const adminPassword = 'adminpassword'; // admin access
+  const adminPassword = 'AdminAuth'; // admin access
 
   if (username === adminUsername && password === adminPassword) {
     const token = jwt.sign({ role: 'admin' }, JWT_SECRET, { expiresIn: '1h' });

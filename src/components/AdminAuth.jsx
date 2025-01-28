@@ -41,7 +41,7 @@ const AdminAuth = () => {
 
   return (
     <div style={{ maxWidth: 400, margin: '0 auto', padding: '50px 0' }}>
-      <h2>Admin Login</h2>
+      <h2 style={{ fontFamily: 'Montserrat, sans-serif' }}>Admin Login</h2>
       <Form name="admin_login" onFinish={onFinish} layout="vertical">
         <Form.Item
           name="username"

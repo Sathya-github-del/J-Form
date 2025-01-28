@@ -12,8 +12,9 @@ import {
     Progress,
     Card,
 } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-
+import { PlusOutlined } from '@ant-design/icons';
+import './form.css';
+import { Drawer } from 'antd';
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
@@ -35,6 +36,8 @@ const tailFormItemLayout = {
 const FormSub = () => {
     const [form] = Form.useForm();
     const [uploadPercent, setUploadPercent] = useState(0);
+    const [visible, setVisible] = useState(false);
+
 
     const handleVideoUpload = async (file) => {
         const formData = new FormData();
@@ -101,9 +104,9 @@ const FormSub = () => {
             message.error('You can only upload PDF files!');
             return false;
         }
-        const isLt5M = file.size / 1024 / 1024 < 5;
+        const isLt5M = file.size / 1024 / 1024 < 10;
         if (!isLt5M) {
-            message.error('Resume must be smaller than 5MB!');
+            message.error('Resume must be smaller than 10MB!');
             return false;
         }
 
@@ -253,7 +256,7 @@ const FormSub = () => {
                                     accept=".jpg,.jpeg,.png"
                                     listType="picture"
                                     maxCount={1}>
-                                    <Button icon={<UploadOutlined />}>Click to Upload Profile Picture</Button>
+                                    <Button icon={<PlusOutlined />}>Click to Upload Profile Picture</Button>
                                 </Upload>
                             </Form.Item>
                         </Col>
@@ -275,7 +278,7 @@ const FormSub = () => {
                                     accept=".pdf"
                                     listType="picture"
                                     maxCount={1}>
-                                    <Button icon={<UploadOutlined />}>Click to Upload Resume</Button>
+                                    <Button icon={<PlusOutlined />}>Click to Upload Resume</Button>
                                 </Upload>
                             </Form.Item>
                         </Col>
@@ -295,7 +298,7 @@ const FormSub = () => {
                                     accept="video/mp4,video/avi,video/mkv"
                                     listType="picture"
                                     maxCount={1}>
-                                    <Button icon={<UploadOutlined />}>Click to Upload Video</Button>
+                                    <Button icon={<PlusOutlined />}>Click to Upload Video</Button>
                                 </Upload>
                                 {uploadPercent > 0 && (
                                     <div style={{ marginTop: '10px', display: 'flex', alignItems: 'center' }}>
@@ -376,11 +379,20 @@ const FormSub = () => {
                 </Form>
                 <div className='fresher' style={{ textAlign: 'center', marginTop: '20px', fontFamily: 'Montserrat' }}>
                     <p style={{ fontSize: '18px', fontWeight: 'bold' }}>Are you a fresher?</p>
-                    <Button type="primary" style={{ width: '150px', height: '25px', fontSize: '16px' }}>
-                        <a href='/formfresh' style={{ color: 'white', textDecoration: 'none' }}>Click here to apply</a>
-                    </Button>
+                    <Button type="primary" style={{ width: '150px', height: '25px', fontSize: '16px' }} onClick={() => setVisible(true)}>Click here to apply</Button>
+                    <Drawer
+                        title="Fresher Application Form"
+                        placement="right"
+                        closable={true}
+                        onClose={() => setVisible(false)}
+                        open={visible}
+                        width={800}
+                    >
+                        <iframe src="/formfresh" frameBorder="0" width="100%" height="600"></iframe>
+                    </Drawer>
                 </div>
-            </Card>
+
+            </Card >
         </div>
     );
 };

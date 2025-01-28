@@ -230,7 +230,7 @@ const AdminForm = () => {
     ];
 
     return (
-        <div style={{ padding: '20px' }}>
+        <div style={{ padding: '20px', fontFamily: 'Montserrat, sans-serif' }}>
             <h2>Admin Panel</h2>
             <Table
                 columns={columns}
